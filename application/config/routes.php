@@ -51,25 +51,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'welcome';
 
-$route['index'] = 'MainController/display_main_page';
-$route['map'] = 'MainController/map';
-
 $route['admin'] = 'AdminController/display_homepage';
 $route['addschoolpage'] = 'AdminController/addschool';
 $route['addschool'] = 'AdminController/add_school_in_database';
 $route['addclasspage'] = 'AdminController/addclass';
 $route['registerpage'] = 'AdminController/register';
-$route['deleteschool'] = 'AdminController/deleteschool';
-$route['EditSchool'] = 'AdminController/editschool';
-$route['adduser'] = 'AdminController/adduser';
-$route['deleteuser'] = 'AdminController/deleteuser';
-$route['edituser'] = 'AdminController/edituser';
-$route['edit_branch'] = 'AdminController/edit_school_branch';
+$route['delete_branch/:num'] = 'AdminController/deletebranch';
+$route['allschool'] = 'AdminController/allschool';
+$route['adduser'] = 'AdminController/dispaly_add_user';
+$route['deleteuser/:num'] = 'AdminController/deleteuser';
+$route['alluser'] = 'AdminController/display_all_users';
+$route['edituser/:num'] = 'AdminController/edit_users';
+$route['edit_branch/:num'] = 'AdminController/edit_school_branch';
 $route['school_branch_json'] = 'AdminController/get_school_branch_json';
+$route['update_branch'] = 'AdminController/update_branch';
+$route['add_user'] = 'AdminController/display_addUser_page';
+$route['adding_user'] = 'AdminController/insert_user_to_database';
+$route['update_user'] = 'AdminController/update_user_in_database';
+$route['chart'] = 'AdminController/display_chart';
+
+$route['index'] = 'MainController/display_main_page';
+$route['map'] = 'MainController/map';
 $route['ranking'] = 'MainController/show_ranking_page';
 $route['career'] = 'MainController/show_cc_page';
-
-
 $route['home'] = 'MainController/display_login_main_page';
 $route['login'] = 'MainController/display_login_page';
 $route['sign_up'] = 'MainController/display_signup_page';

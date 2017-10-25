@@ -16,7 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         color: white;
         padding: 14px 20px;
         margin-top: 20px;
-        margin-left: 130px;
+        margin-left: 50px;
         font-size: 1em;
         border: none;
         border-radius: 4px;
@@ -208,8 +208,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="addschoolpage">Add a School</a></li>
-                        <li><a href="EditSchool">Edit a School</a></li>
-                        <li><a href="deleteschool">Delete a School</a></li>
+                        <li><a href="allschool">All Schools</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -220,8 +219,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="adduser">Add a User</a></li>
-                        <li><a href="edituser">Edit a User</a></li>
-                        <li><a href="deleteuser">Delete a User</a></li>
+                        <li><a href="alluser">All Users</a></li>
                     </ul>
                 </li>
             </ul>
@@ -237,38 +235,65 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="centered">
                 <h1 style="font-family: courier;"><b>Add a User</b></h1>
             </div>
+            <form action="<?php echo base_url();?>index.php/adding_user" method="post">
+                <div class="row">
+                    <div class="col-md-6" style="margin-top: 50px;">
+                        <label>First Name:</label><input  type="text" name="first_name" required></br></br>
+                        <label>Last Name:</label><input  type="text" name="last_name" required></br></br>
+                        <label>User Name:</label><input type="text" name="user_name" required></br></br>
+                    </div>
 
-            <div style="margin-top: 50px;margin-left: 30px;">
-                <form action="<?php echo base_url();?>index.php/addschool" method="post">
-                    <label>First Name:</label><input  type="text" name="first_name" required></br></br>
-                    <label>Last Name:</label><input  type="text" name="last_name" required></br></br>
-                    <label>Contact Number:</label><input  type="text" name="contact_no" required></br></br>
-                    <label>E-mail Address:</label><input  type="email" name="email" required></br></br>
-                    <label>Role:</label><input type="text" name="role" required></br></br>
-                    <label>Password:</label><input type="text" name="pass" required></br></br>                    
-                    <button class="btn">Submit</button>
-                </form>
-            </div>
-
-
-        </section>
-        <!-- /.content -->
+                    <div class="col-md-6" style="margin-top: 50px;">
+                        <label>Password:</label><input  type="password" name="password" required></br></br>
+                        <label>Contact Number:</label><input  type="text" name="contact" required></br></br>
+                        <label>E-mail Address:</label><input  type="email" name="email" required></br></br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3" style="margin-left: 340px;">
+                        <label>Status:</label>
+                        <select required name="status" class="form-control">
+                            <option value="" >Select</option>
+                            <option value="1" >Active</option>
+                            <option value="0" >Deactive</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3" style="margin-left: 340px;">
+                        <label>Role:</label>
+                        <select required name="role" class="form-control">
+                            <option value="" >Select</option>
+                            <option value="admin" >Admin</option>
+                            <option value="user" >User</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3" style="margin-left: 370px;">
+                        <button class="btn">Submit</button>
+                    </div>
+                </div>
+            </form>
     </div>
-    <!-- /.content-wrapper -->
 
 
-    <!-- REQUIRED JS SCRIPTS -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 
-    <!-- jQuery 3 -->
-    <script src="<?php echo base_url();?>bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap 3.3.7 -->
-    <script src="<?php echo base_url();?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="<?php echo base_url();?>dist/js/adminlte.min.js"></script>
 
-    <!-- Optionally, you can add Slimscroll and FastClick plugins.
-         Both of these plugins are recommended to enhance the
-         user experience. -->
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 3 -->
+<script src="<?php echo base_url();?>bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="<?php echo base_url();?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?php echo base_url();?>dist/js/adminlte.min.js"></script>
+
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. -->
 
 
 

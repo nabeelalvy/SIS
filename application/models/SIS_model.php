@@ -55,11 +55,11 @@ class SIS_model extends CI_Model
             return 'login';
         }
         else {
-            $this->db->select('*');
+            $this->db->select('*')
 //        $query = $this->db->get_where('users', 'username', $this->input->post('username'));
-            $this->db->where('username', $this->input->post('username'));
-            $this->db->where('password', $this->input->post('password'));
-            $this->db->from('users');
+                ->where('username', $this->input->post('username'))
+                ->where('password', $this->input->post('password'))
+                ->from('users');
             $query = $this->db->get();
 
             if ($query->row() != null)
@@ -106,12 +106,13 @@ class SIS_model extends CI_Model
     {
 
         $school_name = $this->input->post('key');
-        $this->db->select('*');
-        $this->db->from('schools s');
-        $this->db->join('schools_name sn', 's.sn_id = sn.id', 'inner');
-        $this->db->join('school_locations sl', 's.sl_id = sl.id', 'inner');
-        $this->db->join('school_city sc', 's.city = sc.id', 'inner');
-        $this->db->like('sn.name', $school_name);
+        $this->db->select('*')
+            ->from('schools s')
+            ->join('schools_name sn', 's.sn_id = sn.id', 'inner')
+            ->join('school_locations sl', 's.sl_id = sl.id', 'inner')
+            ->join('school_city sc', 's.city = sc.id', 'inner')
+            ->where('status',1)
+            ->like('sn.name', $school_name);
         $query = $this->db->get();
         $data  = array(
             'school_name' => $query->result(),
@@ -122,12 +123,13 @@ class SIS_model extends CI_Model
     public function area_search()
     {
         $school_area = $this->input->post('area');
-        $this->db->select('*');
-        $this->db->from('schools s');
-        $this->db->join('schools_name sn', 's.sn_id = sn.id', 'inner');
-        $this->db->join('school_locations sl', 's.sl_id = sl.id', 'inner');
-        $this->db->join('school_city sc', 's.city = sc.id', 'inner');
-        $this->db->like('sl.location',$school_area);
+        $this->db->select('*')
+            ->from('schools s')
+            ->join('schools_name sn', 's.sn_id = sn.id', 'inner')
+            ->join('school_locations sl', 's.sl_id = sl.id', 'inner')
+            ->join('school_city sc', 's.city = sc.id', 'inner')
+            ->where('status',1)
+            ->like('sl.location',$school_area);
         $query = $this->db->get();
         $data  = array(
             'school_area' => $query->result(),
@@ -205,10 +207,5 @@ class SIS_model extends CI_Model
             fclose($file_handle);
         }
     }
-
-
-
-
-
 }
 ?>

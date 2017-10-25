@@ -210,8 +210,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="addschoolpage">Add a School</a></li>
-                        <li><a href="EditSchool">Edit a School</a></li>
-                        <li><a href="deleteschool">Delete a School</a></li>
+                        <li><a href="allschool">All Schools</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -222,8 +221,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="adduser">Add a User</a></li>
-                        <li><a href="edituser">Edit a User</a></li>
-                        <li><a href="deleteuser">Delete a User</a></li>
+                        <li><a href="alluser">All Users</a></li>
                     </ul>
                 </li>
             </ul>
@@ -241,26 +239,40 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
 
             <div style="margin-top: 50px;margin-left: 30px;" id="formm">
-                <form action="<?php echo base_url();?>index.php/addschool" method="post">
-                    <label>School Name:</label><input  type="text" name="school_name" required>
-                    <label>Branch Name:</label><input  type="text" name="branch_name" required>
-                    <label>Address:</label><input  type="text" name="address" required></br></br></br>
-                    <label>Contact Number:</label><input  type="text" name="contact_no" required>
-                    <label>City:</label><input  type="text" name="city" required>
-                    <label>E-mail Address:</label><input  type="email" name="email" required></br></br></br>
-                    <label>Fee:</label><input type="text" name="fee" required>
-                    <label>Location:</label><input type="text" name="location" required>
-                    <label>Area of School (in Sq. Yards):</label><input  type="text" name="area" required></br></br></br>                   
-                    <label>No. Of Students:</label><input type="text" name="nos" required>
-                    <label>No. Of Teachers:</label><input type="text" name="not" required>
-                    <label>No. Of Labs:</label><input  type="text" name="nol" required></br></br></br>
-                    <label>No. Of Branches:</label><input type="text" name="nob" required>
-                    <label>Average Board Marks:</label><input type="text" name="marks" required>
+                <form action="<?php echo base_url();?>index.php/update_branch" method="post">
+                    <label>School Name:</label><input  value="<?php echo $school_branch['name']; ?>" type="text" name="school_name" required>
+                    <label>Branch Name:</label><input  value="<?php echo $school_branch['branchName']; ?>" type="text" name="branch_name" required>
+                    <label>Address:</label><input  value="<?php echo $school_branch['address']; ?>"  type="text" name="address" required></br></br></br>
+                    <label>Contact Number:</label><input value="<?php echo $school_branch['phoneNo']; ?>" type="text" name="contact_no" required>
+                    <label>City:</label><input value="<?php echo $school_branch['city_name']; ?>" type="text" name="city" required>
+                    <label>E-mail Address:</label><input value="<?php echo $school_branch['email']; ?>" type="email" name="email" required></br></br></br>
+                    <label>Fee:</label><input  type="text" name="fee" required>
+                    <label>Location:</label><input value="<?php echo $school_branch['location']; ?>" type="text" name="location" required>
+                    <label>Area of School (in Marla):</label><input value="<?php echo $school_branch['Area_of_school']; ?>" type="text" name="area" required></br></br></br>
+                    <label>No. Of Students:</label><input value="<?php echo $school_branch['no_of_students']; ?>" type="text" name="nos" required>
+                    <label>No. Of Teachers:</label><input value="<?php echo $school_branch['no_of_teachers']; ?>" type="text" name="not" required>
+                    <label>No. Of Labs:</label><input value="<?php echo $school_branch['no_of_labs']; ?>" type="text" name="nol" required></br></br></br>
+                    <label>No. Of Branches:</label><input value="<?php echo $school_branch['no_of_branches']; ?>" type="text" name="nob" required>
+                    <label>Average Board Marks:</label><input value="<?php echo $school_branch['avg_board_marks']; ?>" type="text" name="marks" required>
                     <label>Library:</label>
                     <select required name="lib">
-                        <option value="">Select</option>
-                        <option >Yes</option>
-                        <option >No</option>
+                        <?php if($user->role == 1){ ?>
+                            <option value="1" selected>Yes</option>
+                            <option value="0" >No</option>
+                        <?php } else { ?>
+                            <option value="0" selected>No</option>
+                            <option value="1" >Yes</option>
+                        <?php }?>
+                    </select></br></br>
+                    <label>Status:</label>
+                    <select required name="status">
+                        <?php if($user->status == 1){ ?>
+                            <option value="1" selected>Shown</option>
+                            <option value="0" >Not Shown</option>
+                        <?php } else { ?>
+                            <option value="0" selected>Not Shown</option>
+                            <option value="1" >Shown</option>
+                        <?php }?>
                     </select>
                     <br><br>                    
                     <button class="btn">Update</button>

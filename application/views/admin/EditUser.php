@@ -5,7 +5,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
 <style>
-   
     input
     {
         border-radius: 4px;
@@ -17,7 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         color: white;
         padding: 14px 20px;
         margin-top: 20px;
-        margin-left: 130px;
+        margin-left: 50px;
         font-size: 1em;
         border: none;
         border-radius: 4px;
@@ -38,7 +37,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin | Add School</title>
+    <title>Admin | Add user</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="<?php echo base_url();?>bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -52,8 +51,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
     <link rel="stylesheet" href="<?php echo base_url();?>dist/css/skins/skin-blue.min.css">
-
-      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></link>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -211,8 +208,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="addschoolpage">Add a School</a></li>
-                        <li><a href="EditSchool">Edit a School</a></li>
-                        <li><a href="deleteschool">Delete a School</a></li>
+                        <li><a href="allschool">All Schools</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -223,8 +219,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="adduser">Add a User</a></li>
-                        <li><a href="edituser">Edit a User</a></li>
-                        <li><a href="deleteuser">Delete a User</a></li>
+                        <li><a href="alluser">All Users</a></li>
                     </ul>
                 </li>
             </ul>
@@ -240,110 +235,76 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="centered">
                 <h1 style="font-family: courier;"><b>Edit User</b></h1>
             </div>
+            <form action="<?php echo base_url();?>index.php/update_user" method="post">
+                <div class="row">
+                    <div class="col-md-6" style="margin-top: 50px;">
+                        <label>First Name:</label><input value="<?php echo $user->firstname;?>" type="text" name="first_name" required></br></br>
+                        <label>Last Name:</label><input value="<?php echo $user->lastname;?>" type="text" name="last_name" required></br></br>
+                        <label>User Name:</label><input value="<?php echo $user->username;?>" type="text" name="user_name" required></br></br>
+                    </div>
 
-            <div style="margin-top: 50px;margin-left: 30px;">
-<table id="example" class="display" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Contact Numnber</th>
-                <th>E-mail Address</th>
-                <th>Role</th>
-                <th>Password</th>
-                <th>Edit</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Contact Numnber</th>
-                <th>E-mail Address</th>
-                <th>Role</th>
-                <th>Password</th>
-                <th>Edit</th>
-            </tr>
-        </tfoot>
-        <tbody>
-            <tr>
-                <td>Asad</td>
-                <td>Masood</td>
-                <td>042-35314441</td>
-                <td>asad@gmail.com</td>
-                <td>Student</td>
-                <td>abc123</td>
-                <td><a href="#">Edit</a></td>
-            </tr>
-            <tr>
-                <td>Nabeel</td>
-                <td>Alvy</td>
-                <td>042-35433441</td>
-                <td>nabeel@gmail.com</td>
-                <td>Student</td>
-                <td>dddc123</td>
-                <td><a href="#">Edit</a></td>
-            </tr>
-            <tr>
-                <td>Malik</td>
-                <td>Musharraf</td>
-                <td>042-3444441</td>
-                <td>mmusharaf@gmail.com</td>
-                <td>Teacher</td>
-                <td>aadcad23</td>
-                <td><a href="#">Edit</a></td>                
-            </tr>
-            <tr>
-                <td>Mudassar</td>
-                <td>Zaman</td>
-                <td>042-3333441</td>
-                <td>mzaman@gmail.com</td>
-                <td>School Admin</td>
-                <td>aeeed3</td>
-                <td><a href="#">Edit</a></td>
-            </tr>
-    </table>
-            </div>
-
-
-        </section>
-        <!-- /.content -->
+                    <div class="col-md-6" style="margin-top: 50px;">
+                        <label>Password:</label><input value="<?php echo $user->password;?>" type="password" name="password" required></br></br>
+                        <label>Contact Number:</label><input value="<?php echo $user->contact;?>" type="text" name="contact" required></br></br>
+                        <label>E-mail Address:</label><input value="<?php echo $user->email;?>" type="email" name="email" required></br></br>
+                        <input value="<?php echo $user->id;?>" type="hidden" name="id" required></br></br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3" style="margin-left: 340px;">
+                        <label>Status:</label>
+                        <select required name="status" class="form-control">
+                            <option value="" >Select</option>
+                            <?php if($user->status == 1){?>
+                                <option value="1" selected>Active</option>
+                                <option value="0" >Deactive</option>
+                            <?php }else {?>
+                                <option value="1" >Active</option>
+                                <option value="0" selected>Deactive</option>
+                            <?php }?>
+                        </select>
+                    </div>
+                    <div class="col-md-3" style="margin-left: 340px;">
+                        <label>Role:</label>
+                        <select required name="role" class="form-control">
+                            <option value="" >Select</option>
+                            <?php if($user->type == 'admin'){?>
+                                <option value="admin" selected>Admin</option>
+                                <option value="user" >User</option>
+                            <?php }else{?>
+                                <option value="admin">Admin</option>
+                                <option value="user" selected>User</option>
+                            <?php }?>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3" style="margin-left: 370px;">
+                        <button class="btn">Submit</button>
+                    </div>
+                </div>
+            </form>
     </div>
-    <!-- /.content-wrapper -->
 
 
-    <!-- REQUIRED JS SCRIPTS -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 
-    <!-- jQuery 3 -->
-    <script src="<?php echo base_url();?>bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap 3.3.7 -->
-    <script src="<?php echo base_url();?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="<?php echo base_url();?>dist/js/adminlte.min.js"></script>
 
-    <!-- Optionally, you can add Slimscroll and FastClick plugins.
-         Both of these plugins are recommended to enhance the
-         user experience. -->
+<!-- REQUIRED JS SCRIPTS -->
 
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<!-- jQuery 3 -->
+<script src="<?php echo base_url();?>bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="<?php echo base_url();?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?php echo base_url();?>dist/js/adminlte.min.js"></script>
 
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. -->
 
 </body>
-
-<script>
-$(document).ready(function() {
-    $('#example').DataTable({
-        "columns": [
-            { "data": "name" },
-            { "data": "type" },
-            { "data": "number" },
-            { "data": "email" },
-            { "data": "role" },
-            { "data": "password" },
-            { "data": "edit" }
-        ]
-    });
-} );
-</script>
 </html>

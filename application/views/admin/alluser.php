@@ -5,24 +5,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
 <style>
-   
+
     input
     {
         border-radius: 4px;
     }
-    .btn
-    {
-        width: 85px;
-        background-color: #0D8A8A;
-        color: white;
-        padding: 14px 20px;
-        margin-top: 20px;
-        margin-left: 130px;
-        font-size: 1em;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+    /*.btn*/
+    /*{*/
+        /*width: 85px;*/
+        /*background-color: #0D8A8A;*/
+        /*color: white;*/
+        /*padding: 14px 20px;*/
+        /*margin-top: 20px;*/
+        /*margin-left: 130px;*/
+        /*font-size: 1em;*/
+        /*border: none;*/
+        /*border-radius: 4px;*/
+        /*cursor: pointer;*/
+    /*}*/
     label{
         display:inline-block;
         width:150px;
@@ -53,7 +53,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           apply the skin class to the body tag so the changes take effect. -->
     <link rel="stylesheet" href="<?php echo base_url();?>dist/css/skins/skin-blue.min.css">
 
-      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></link>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></link>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -211,8 +211,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="addschoolpage">Add a School</a></li>
-                        <li><a href="EditSchool">Edit a School</a></li>
-                        <li><a href="deleteschool">Delete a School</a></li>
+                        <li><a href="allschool">All Schools</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -223,8 +222,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="adduser">Add a User</a></li>
-                        <li><a href="edituser">Edit a User</a></li>
-                        <li><a href="deleteuser">Delete a User</a></li>
+                        <li><a href="alluser">All Users</a></li>
                     </ul>
                 </li>
             </ul>
@@ -238,49 +236,59 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <section class="content container-fluid">
 
             <div class="centered">
-                <h1 style="font-family: courier;"><b>Edit School</b></h1>
+                <h1 style="font-family: courier;"><b>All Users</b></h1>
             </div>
 
-            <select id="school" name="id">
-                <option> Select</option>
-                <?php
-                foreach ($all_school as $school) {
-                    ?>
-                    <option value="<?php echo $school->id ?>"> <?php echo $school->name ?></option>
-                    <?php
-                }
-                ?>
-            </select>
-            <div style="margin-top: 50px;margin-left: 30px;">
-
-<table id="example"  class="display" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>Sr. No.</th>
-                <th>Branch Name</th>
-                <th>Address</th>
-                <th>Contact Numnber</th>
-                <th>E-mail Address</th>
-                <th>Fee</th>
-                <th>Edit</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>Sr. No.</th>
-                <th>Branch Name</th>
-                <th>Address</th>
-                <th>Contact Numnber</th>
-                <th>E-mail Address</th>
-                <th>Fee</th>
-                <th>Edit</th>
-            </tr>
-        </tfoot>
-        <tbody>
-
-
-        </tbody>
-    </table>
+            <div class="row">
+                <div class="col-md-11">
+                    <div style="margin-top: 50px;margin-left: 30px;">
+                        <table id="example" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>User Name</th>
+                                <th>Contact Numnber</th>
+                                <th>E-mail Address</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Password</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>User Name</th>
+                                <th>Contact Numnber</th>
+                                <th>E-mail Address</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Password</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <?php foreach ($allusers as $user){?>
+                                <tr>
+                                    <td><?php echo $user['firstname']?></td>
+                                    <td><?php echo $user['lastname']?></td>
+                                    <td><?php echo $user['username']?></td>
+                                    <td><?php echo $user['contact']?></td>
+                                    <td><?php echo $user['email']?></td>
+                                    <td><?php echo $user['type']?></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $user['status']?></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $user['password']?></td>
+                                    <td><a href="edituser/<?php echo $user['id']?>"><button type='button' class='btn btn-primary'>Edit</button></a></td>
+                                    <td><a href="deleteuser/<?php echo $user['id']?>"><button type='button' class='btn btn-primary'>Delete</button></a></td>
+                                </tr>
+                            <?php }?>
+                        </table>
+                    </div>
+                </div>
             </div>
 
 
@@ -303,61 +311,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
          Both of these plugins are recommended to enhance the
          user experience. -->
 
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
 
 </body>
 
 <script>
-$(document).ready(function() {
-    $('#example').DataTable({
-        "columns": [
-            { "data": "name" },
-            { "data": "type" },
-            { "data": "address" },
-            { "data": "number" },
-            { "data": "email" },
-            { "data": "fee" },
-            { "data": "edit" }
-        ]
-    });
-} );
-
-
-//SCHOOL SEARCHING
-$('#school').change(function () {
-    var item = $(this);
-    $.ajax({
-        type: 'POST',
-        url: 'school_branch_json',
-        dataType: 'json',
-        data: {school_name:item.val()},
-        success: function(data){
-            console.log(data);
-            append_json(data);
-        }
-    });
-});
-
-
-function append_json(data){
-    if(data){
-        var len = Object.keys(data).length;
-        var txt = "";
-        if(len > 0){
-            for(var i=0;i<len;i++){
-                txt += "<tr><td>"+(i+1)+"</td><td>"+data[i].branchName+"</td><td>"+data[i].address+"</td><td>"+data[i].phoneNo+"</td><td>"+data[i].email+"</td><td>"+'<a href="'+ data[i].map + '" target="_blank">Map</a>'+"</td><td>"+'<button class="button edit" data-id="'+data[i].id+'">edit button</button>'+"</td></tr>";
-            }
-            if(txt != ""){
-                $("tbody").empty().append(txt);
-            }
-        }
-    }
-}
-
-$('.edit').
-
+    $(document).ready(function() {
+        $('#example').DataTable({
+            "columns": [
+                { "data": "name" },
+                { "data": "type" },
+                { "data": "number" },
+                { "data": "email" },
+                { "data": "role" },
+                { "data": "password" },
+                { "data": "edit" }
+            ]
+        });
+    } );
 </script>
-
 </html>

@@ -5,23 +5,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
 <style>
+
     input
     {
         border-radius: 4px;
     }
-    .btn
-    {
-        width: 85px;
-        background-color: #0D8A8A;
-        color: white;
-        padding: 14px 20px;
-        margin-top: 20px;
-        margin-left: 130px;
-        font-size: 1em;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+    /*.btn*/
+    /*{*/
+    /*width: 85px;*/
+    /*background-color: #0D8A8A;*/
+    /*color: white;*/
+    /*padding: 14px 20px;*/
+    /*margin-top: 20px;*/
+    /*margin-left: 130px;*/
+    /*font-size: 1em;*/
+    /*border: none;*/
+    /*border-radius: 4px;*/
+    /*cursor: pointer;*/
+    /*}*/
     label{
         display:inline-block;
         width:150px;
@@ -51,6 +52,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
     <link rel="stylesheet" href="<?php echo base_url();?>dist/css/skins/skin-blue.min.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></link>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -198,7 +201,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Home</span></a></li>
+                <li class="active"><a href="admin"><i class="fa fa-link"></i> <span>Home</span></a></li>
                 <li><a href="#"><i class="fa fa-link"></i> <span>Analytics</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>School Management</span>
@@ -208,7 +211,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="addschoolpage">Add a School</a></li>
-                        <li><a href="allschool">All School</a></li>
+                        <li><a href="allschool">All Schools</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -233,35 +236,53 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <section class="content container-fluid">
 
             <div class="centered">
-                <h1 style="font-family: courier;"><b>Add a School</b></h1>
+                <h1 style="font-family: courier;"><b>Edit School</b></h1>
             </div>
 
+            <select id="school" name="id">
+                <option> Select</option>
+                <?php
+                foreach ($all_school as $school) {
+                    ?>
+                    <option value="<?php echo $school->id ?>"> <?php echo $school->name ?></option>
+                    <?php
+                }
+                ?>
+            </select>
             <div style="margin-top: 50px;margin-left: 30px;">
-                <form action="<?php echo base_url();?>index.php/addschool" name="school" method="post">
-                    <label>School Name:</label><input  type="text" name="school_name" required>
-                    <label>Branch Name:</label><input  type="text" name="branch_name" required>
-                    <label>Address:</label><input  type="text" name="address" required></br></br></br>
-                    <label>Contact Number:</label><input  type="text" name="contact_no" required>
-                    <label>City:</label><input  type="text" name="city" required>
-                    <label>E-mail Address:</label><input  type="email" name="email" required></br></br></br>
-                    <label>Fee:</label><input type="text" name="fee" required>
-                    <label>Location:</label><input type="text" name="location" required>
-                    <label>Area of School (in Marla):</label><input  type="text" name="area" required></br></br></br>
-                    <label>No. Of Students:</label><input type="text" name="nos" required>
-                    <label>No. Of Teachers:</label><input type="text" name="not" required>
-                    <label>No. Of Labs:</label><input  type="text" name="nol" required></br></br></br>
-                    <label>No. Of Branches:</label><input type="text" name="nob" required>
-                    <label>Average Board Marks:</label><input type="text" name="marks" required>
-                    <label>Library:</label>
-                    <select required name="lib">
-                        <option value="">Select</option>
-                        <option >Yes</option>
-                        <option >No</option>
-                    </select>
-                    <br><br>
-                    <button class="btn btn-default"  type="submit" name="submit" value="Submit">submit</button>
 
-                </form>
+                <table id="example"  class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Branch Name</th>
+                        <th>Address</th>
+                        <th>Contact Numnber</th>
+                        <th>E-mail Address</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Branch Name</th>
+                        <th>Address</th>
+                        <th>Contact Numnber</th>
+                        <th>E-mail Address</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+
+
+                    </tbody>
+                </table>
             </div>
 
 
@@ -284,8 +305,67 @@ scratch. This page gets rid of all links and provides the needed markup only.
          Both of these plugins are recommended to enhance the
          user experience. -->
 
-
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
 
 </body>
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            "columns": [
+                { "data": "name" },
+                { "data": "type" },
+                { "data": "address" },
+                { "data": "number" },
+                { "data": "email" },
+                { "data": "fee" },
+                { "data": "edit" }
+            ]
+        });
+    } );
+
+
+    //SCHOOL SEARCHING
+    $('#school').change(function () {
+        var item = $(this);
+        $.ajax({
+            type: 'POST',
+            url: 'school_branch_json',
+            dataType: 'json',
+            data: {school_name:item.val()},
+            success: function(data){
+                console.log(data);
+                append_json(data);
+            }
+        });
+    });
+
+
+    function append_json(data){
+        if(data){
+            var len = Object.keys(data['school_branch']).length;
+            var txt = "";
+            if(len > 0){
+                for(var i=0;i<len;i++){
+                    data['school_branch'][i].edit = "<a href=edit_branch/"+data['school_branch'][i].id+"><button type='button' class='btn btn-primary'>Edit</button></a>";
+                    data['school_branch'][i].delete = "<a href=delete_branch/"+data['school_branch'][i].id+"><button type='button' class='btn btn-primary'>Delete</button></a>";
+                    txt += "<tr><td>"+(i+1)+"</td><td>"+data['school_branch'][i].branchName+"</td><td>"+data['school_branch'][i].address+"</td><td>"+data['school_branch'][i].phoneNo+"</td><td>"+data['school_branch'][i].email+"</td><td>"+'<a href="'+ data['school_branch'][i].map + '" target="_blank">Map</a>'+"</td><td>"+data['school_branch'][i].status+"</td><td>"+data['school_branch'][i].edit+"</td><td>"+data['school_branch'][i].delete+"</td></tr>";
+                }
+                if(txt != ""){
+                    $("tbody").empty().append(txt);
+                }
+            }
+        }
+    }
+
+    $(document).on('click','.edit', function () {
+        var id = (this).data('id');
+        alert('I am here');
+        window.location.href = "/admin/edit_branch?id="+id;
+    });
+
+</script>
+<!--<td>"+'<button class="button edit " data-id="'+data['school_branch'][i].id+'">Edit</button>'+"</td>-->
 </html>
